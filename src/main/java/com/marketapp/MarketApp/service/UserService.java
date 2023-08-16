@@ -25,11 +25,9 @@ public class UserService {
         return userDtoConverter.convertUserToUserDto(userRepository.save(user));
     }
 
-    public UserDto saveBasket(User user,Basket basket){
-        user.setBasket(basket);
-        return userDtoConverter.convertUserToUserDto(userRepository.save(user));
+    public User saveUser(User user) {
+        return userRepository.save(user);
     }
-
     public List<UserDto> getAllUsers(){
         return userRepository.findAll()
                 .stream()

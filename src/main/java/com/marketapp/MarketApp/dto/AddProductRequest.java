@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 public class AddProductRequest {
 
 
-    private Long user_id;
-    private Long product_id;
-    private Long basket_id;
+    private Long userId;
+    private Long productId;
+    private Long basketId;
     private int quantity;
 
 }

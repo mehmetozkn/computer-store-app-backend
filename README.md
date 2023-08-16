@@ -4,7 +4,7 @@
 
 ### Spring Boot Application
 
-## This project provides to add products to basket for existing users.
+- This project provides to add products to basket for existing users.
 
 ### Summary
 
@@ -18,7 +18,7 @@ The application has 4 services
 - ProductService
 - BasketService
 - UserService
-- BasketProductAPI
+- BasketProductService
 
 ---
 

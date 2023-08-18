@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class AddProductRequest {
 
-
     private Long userId;
     private Long productId;
     private Long basketId;

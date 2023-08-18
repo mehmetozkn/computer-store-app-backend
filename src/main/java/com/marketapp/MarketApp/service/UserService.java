@@ -28,6 +28,7 @@ public class UserService {
     public User saveUser(User user) {
         return userRepository.save(user);
     }
+
     public List<UserDto> getAllUsers(){
         return userRepository.findAll()
                 .stream()

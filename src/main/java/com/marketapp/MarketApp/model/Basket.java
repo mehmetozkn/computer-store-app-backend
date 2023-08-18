@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "BASKETS")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,11 +16,7 @@ public class Basket {
     @Id
     private Long id;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<BasketProduct> products = new ArrayList<>();
-
-    @OneToOne(mappedBy = "basket", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
+    @OneToOne(mappedBy = "basket")
     private User user;
 
 }

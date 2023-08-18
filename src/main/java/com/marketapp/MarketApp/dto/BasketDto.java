@@ -13,6 +13,5 @@ import java.util.List;
 public class BasketDto {
 
     private Long id;
-    private List<BasketProduct> products;
     private User user;
 }

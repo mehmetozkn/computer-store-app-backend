@@ -1,28 +1,26 @@
-/*
 package com.marketapp.MarketApp.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
-import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
+import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
 
 @Configuration
+@EnableRedisRepositories
 public class RedisConfig {
 
 
     @Bean
-    public JedisConnectionFactory jedisConnectionFactory() {
-        RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration("localhost", 6379);
-        return new JedisConnectionFactory(redisStandaloneConfiguration);
+    public LettuceConnectionFactory redisConnectionFactory() {
+        return new LettuceConnectionFactory();
     }
 
     @Bean
-    public RedisTemplate redisTemplate() {
-        RedisTemplate template = new RedisTemplate<>();
-        template.setConnectionFactory(jedisConnectionFactory());
+    public RedisTemplate<?, ?> redisTemplate() {
+        RedisTemplate<byte[], byte[]> template = new RedisTemplate<>();
+        template.setConnectionFactory(redisConnectionFactory());
         return template;
     }
 
 }
-*/

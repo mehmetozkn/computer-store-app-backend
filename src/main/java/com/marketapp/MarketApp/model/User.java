@@ -1,13 +1,14 @@
 package com.marketapp.MarketApp.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "users")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
@@ -20,11 +21,10 @@ public class User {
 
     private String surname;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fk_basket_id")
-    private Basket basket;
+    @OneToMany
+    private List<BasketProduct> productList;
 
-    public User(String name, String surname ) {
+    public User(String name, String surname) {
         this.name = name;
         this.surname = surname;
 

@@ -6,8 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/v1/operation")
 public class BasketProductController {
@@ -21,7 +19,7 @@ public class BasketProductController {
     @PostMapping("/addProductToBasket")
     public ResponseEntity<BasketProductDto>
     addProductToBasket(@Validated @RequestBody AddProductRequest addProductRequest){
-        return ResponseEntity.ok(basketProductService.addProductToBasket(addProductRequest));
+        return ResponseEntity.ok(basketProductService.addProduct(addProductRequest));
     }
 
 

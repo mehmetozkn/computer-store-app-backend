@@ -1,13 +1,15 @@
 package com.marketapp.MarketApp.service;
+
 import com.marketapp.MarketApp.dto.UserDto;
 import com.marketapp.MarketApp.dto.converter.UserDtoConverter;
 import com.marketapp.MarketApp.exception.UserNotFoundException;
-import com.marketapp.MarketApp.model.Basket;
+import com.marketapp.MarketApp.model.BasketProduct;
 import com.marketapp.MarketApp.model.User;
+import com.marketapp.MarketApp.repository.BasketProductRepository;
 import com.marketapp.MarketApp.repository.UserRepository;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -15,12 +17,20 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final UserDtoConverter userDtoConverter;
+    private final BasketProductRepository basketProductRepository;
 
-    public UserService(UserRepository userRepository, UserDtoConverter userDtoConverter) {
+    public UserService(UserRepository userRepository, UserDtoConverter userDtoConverter, BasketProductRepository basketProductRepository) {
         this.userRepository = userRepository;
         this.userDtoConverter = userDtoConverter;
+        this.basketProductRepository = basketProductRepository;
     }
 
+    public List<BasketProduct> getProductsByUserId(Long userId) {
+        User user = findUserById(userId);
+        return basketProductRepository.findAll().stream().filter(e ->
+                e.getUser().getId().equals(userId)).collect(Collectors.toList());
+
+    }
     public UserDto createUser(User user){
         return userDtoConverter.convertUserToUserDto(userRepository.save(user));
     }
@@ -30,10 +40,11 @@ public class UserService {
     }
 
     public List<UserDto> getAllUsers(){
-        return userRepository.findAll()
+        List<UserDto> collect = userRepository.findAll()
                 .stream()
                 .map(userDtoConverter::convertUserToUserDto)
                 .collect(Collectors.toList());
+        return collect;
     }
 
     public UserDto getUserById(Long id) {

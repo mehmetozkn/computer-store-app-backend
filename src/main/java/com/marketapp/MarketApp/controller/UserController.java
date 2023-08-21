@@ -1,10 +1,9 @@
 package com.marketapp.MarketApp.controller;
 
 import com.marketapp.MarketApp.dto.UserDto;
-import com.marketapp.MarketApp.model.Basket;
+import com.marketapp.MarketApp.model.BasketProduct;
 import com.marketapp.MarketApp.model.User;
 import com.marketapp.MarketApp.service.UserService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,6 +32,11 @@ public class UserController {
     @GetMapping("/getUserById/{id}")
     public ResponseEntity<UserDto> getUserById(@PathVariable("id") Long id) {
         return ResponseEntity.ok(userService.getUserById(id));
+    }
+
+    @GetMapping("/getProductsByUserId/{id}")
+    public ResponseEntity<List<BasketProduct>> getProductsByUserId(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(userService.getProductsByUserId(id));
     }
 
     @PutMapping("/update/{id}")

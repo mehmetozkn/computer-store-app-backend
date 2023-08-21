@@ -1,16 +1,14 @@
 package com.marketapp.MarketApp.dto;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class AddProductRequest {
 
     private Long userId;
     private Long productId;
-    private Long basketId;
     private int quantity;
 
 }

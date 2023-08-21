@@ -1,11 +1,15 @@
 package com.marketapp.MarketApp.dto;
 
-import com.marketapp.MarketApp.model.Basket;
+import com.marketapp.MarketApp.model.BasketProduct;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+import java.util.List;
+
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserDto {
@@ -13,6 +17,7 @@ public class UserDto {
     private Long id;
     private String name;
     private String surname;
-    private Basket basket;
+    private List<BasketProduct> productList;
+
 
 }

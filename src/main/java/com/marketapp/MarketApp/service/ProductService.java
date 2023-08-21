@@ -1,12 +1,13 @@
 package com.marketapp.MarketApp.service;
+
 import com.marketapp.MarketApp.dto.ProductDto;
 import com.marketapp.MarketApp.dto.converter.ProductDtoConverter;
 import com.marketapp.MarketApp.exception.ProductNotFoundException;
 import com.marketapp.MarketApp.model.Product;
 import com.marketapp.MarketApp.repository.ProductRepository;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -18,13 +19,14 @@ public class ProductService {
     public ProductService(ProductRepository productRepository, ProductDtoConverter productDtoConverter) {
         this.productRepository = productRepository;
         this.productDtoConverter = productDtoConverter;
+
     }
 
-    public ProductDto createProduct(Product product){
+    public ProductDto createProduct(Product product) {
         return productDtoConverter.convertProductToProductDto(productRepository.save(product));
     }
 
-    public List<ProductDto> getAll(){
+    public List<ProductDto> getAll() {
         return productRepository.findAll()
                 .stream()
                 .map(productDtoConverter::convertProductToProductDto)

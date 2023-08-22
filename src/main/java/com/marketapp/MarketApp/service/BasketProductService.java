@@ -8,7 +8,9 @@ import com.marketapp.MarketApp.model.Product;
 import com.marketapp.MarketApp.model.User;
 import com.marketapp.MarketApp.repository.BasketProductRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -34,22 +36,32 @@ public class BasketProductService {
         Product product = productService.findProductById(addProductRequest.getProductId());
         User user = userService.findUserById(addProductRequest.getUserId());
 
-        BasketProduct basketProduct = new BasketProduct();
-        basketProduct.setProduct(product);
-        basketProduct.setUser(user);
-        basketProduct.setQuantity(addProductRequest.getQuantity());
+        BasketProduct basketProduct = user.getProductList().stream()
+                .filter(item -> item.getProduct().getId() == product.getId())
+                .findFirst()
+                .map(item -> {
+                    item.setQuantity(item.getQuantity() + addProductRequest.getQuantity());
+                    return item;
+                })
+                .orElseGet(() -> createBasketProduct(addProductRequest.getQuantity(), product, user));
 
         List<BasketProduct> productList = user.getProductList();
         productList.add(basketProduct);
+
 
         return basketProductDtoConverter
                 .convertBasketProductToBasketProductDto(basketProductRepository.save(basketProduct));
     }
 
-    public List<BasketProduct> getAll() {
-        return basketProductRepository.findAll();
-
+    private BasketProduct createBasketProduct(int quantity, Product product, User user) {
+        BasketProduct basketProduct = new BasketProduct();
+        basketProduct.setProduct(product);
+        basketProduct.setUser(user);
+        basketProduct.setQuantity(quantity);
+        return basketProduct;
     }
+
+
 
 
 }

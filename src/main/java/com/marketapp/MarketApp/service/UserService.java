@@ -27,8 +27,9 @@ public class UserService {
 
     public List<BasketProduct> getProductsByUserId(Long userId) {
         User user = findUserById(userId);
-        return basketProductRepository.findAll().stream().filter(e ->
-                e.getUser().getId().equals(userId)).collect(Collectors.toList());
+        return basketProductRepository.findAll().stream()
+                .filter(e -> e.getUser().getId().equals(userId))
+                .collect(Collectors.toList());
 
     }
     public UserDto createUser(User user){

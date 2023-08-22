@@ -22,6 +22,7 @@ public class User {
     private String surname;
 
     @OneToMany
+    @JoinColumn(name  = "list")
     private List<BasketProduct> productList;
 
     public User(String name, String surname) {

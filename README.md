@@ -1,4 +1,4 @@
-# Market API
+# Store API
 
 ---
 

@@ -63,7 +63,7 @@ public class UserService {
     public UserDto deleteUser(Long id) {
         User user = findUserById(id);
         userRepository.delete(user);
-        return  userDtoConverter.convertUserToUserDto(user);
+        return userDtoConverter.convertUserToUserDto(user);
 
     }
 

@@ -1,28 +1,19 @@
-version: '20.10.20'
+version: '3.8'
 
 services:
   marketapp:
-    image: marketapp
-    container_name: marketapp
+    image: computer_store
+    container_name: computer_store
     build:
       context: ./
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/marketapp
-      SPRING_DATASOURCE_USERNAME: mehmetozkan
-      SPRING_DATASOURCE_PASSWORD: 123456
-      SPRING_JPA_HIBERNATE_DDL_AUTO: update
-    depends_on:
-      - postgresql
 
-  postgresql:
-    image: postgres
-    container_name: postgres
-    ports:
-      - "5432:5432"
-    environment:
-      POSTGRES_USER: mehmetozkan
-      POSTGRES_PASSWORD: 123456
-      POSTGRES_DB: myapp
+    depends_on:
+      - h2db
+
+  h2db:
+    image: oscarfonts/h2:latest
+    volumes:
+      - ./docker-entrypoint-initdb.d/initdb.sql:/docker-entrypoint-initdb.d/initdb.sql

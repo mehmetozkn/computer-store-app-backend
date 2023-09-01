@@ -1,6 +1,5 @@
 package com.marketapp.MarketApp.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,6 +8,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class Product {
 
     @Id
@@ -19,11 +19,20 @@ public class Product {
 
     private Long price;
 
+    private int ram;
+
+    private int storage;
+
+    private String processor;
+
     private String imageUrl;
 
-    public Product(String name, Long price, String imageUrl) {
+    public Product(String name, Long price, int ram, int storage, String processor, String imageUrl) {
         this.name = name;
         this.price = price;
+        this.ram = ram;
+        this.storage = storage;
+        this.processor = processor;
         this.imageUrl = imageUrl;
     }
 }

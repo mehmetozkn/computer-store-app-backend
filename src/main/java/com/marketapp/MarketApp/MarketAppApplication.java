@@ -29,16 +29,17 @@ public class MarketAppApplication implements CommandLineRunner {
     @Override
     public void run(String... args) {
 
-     /*
-       User user1 = userRepository.save(new User("Mehmet", "Özkan"));
+        User user1 = userRepository.save(new User("Mehmet", "Özkan"));
         User user2 = userRepository.save(new User("Ahmet", "Ak"));
 
-        String keyboardUrl = "https://firebasestorage.googleapis.com/v0/b/marketapp-fd5d2.appspot.com/o/keyboard.jpeg?alt=media&token=0e40a51b-cc31-430f-a582-b3dcdb1f54aa";
-        String macbookUrl = "https://firebasestorage.googleapis.com/v0/b/marketapp-fd5d2.appspot.com/o/macbook.jpeg?alt=media&token=03aead29-e825-4c14-88b1-10abfb2ea014";
+        String lenovaUrl = "https://firebasestorage.googleapis.com/v0/b/marketapp-fd5d2.appspot.com/o/lenova.jpeg?alt=media&token=44d3417e-869f-4cdc-acdf-cfb0d07c786c";
+        String macbookUrl = "https://firebasestorage.googleapis.com/v0/b/marketapp-fd5d2.appspot.com/o/macbook.jpeg?alt=media&token=ad9d1898-91d0-43ea-94b6-92e7129ddeb8";
 
-        Product product1 = productRepository.save(new Product("Keyboard", 200L, keyboardUrl));
-        Product product2 = productRepository.save(new Product("Macbook", 1500L, macbookUrl));
+        Product product1 = productRepository.save(new Product("Lenova ThinkPad E15" , 1000L,  8, 256,"Intel i7-12555U", lenovaUrl));
+        Product product2 = productRepository.save(new Product("Macbook Air", 1500L, 16, 512, "M1", macbookUrl));
+        Product product3 = productRepository.save(new Product("Lenova ThinkPad X1", 1200L,  16, 512,"Intel i7-110005H", lenovaUrl));
+        Product product4 = productRepository.save(new Product("Lenova K12", 1400L,  16, 512,"Intel i7-13000K", lenovaUrl));
+        Product product5 = productRepository.save(new Product("Macbook Pro", 2300L, 16, 512, "M1 Pro", macbookUrl));
 
-        */
     }
 }

@@ -4,10 +4,7 @@ import com.marketapp.MarketApp.dto.AddProductRequest;
 import com.marketapp.MarketApp.dto.BasketProductDto;
 import com.marketapp.MarketApp.service.BasketProductService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/v1/operation")
@@ -25,6 +22,13 @@ public class BasketProductController {
     addProductToBasket(@RequestBody AddProductRequest addProductRequest){
         return ResponseEntity.ok(basketProductService.addProduct(addProductRequest));
     }
-
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<BasketProductDto> deleteProduct(@PathVariable("id") Long id){
+        return ResponseEntity.ok(basketProductService.deleteBasketProduct(id));
+    }
+    @DeleteMapping("/deleteAll")
+    public void clearBasket(){
+         basketProductService.clearBasket();
+    }
 
 }

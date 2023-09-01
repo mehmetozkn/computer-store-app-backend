@@ -2,7 +2,9 @@ package com.marketapp.MarketApp.service;
 
 import com.marketapp.MarketApp.dto.AddProductRequest;
 import com.marketapp.MarketApp.dto.BasketProductDto;
+import com.marketapp.MarketApp.dto.ProductDto;
 import com.marketapp.MarketApp.dto.converter.BasketProductDtoConverter;
+import com.marketapp.MarketApp.exception.ProductNotFoundException;
 import com.marketapp.MarketApp.model.BasketProduct;
 import com.marketapp.MarketApp.model.Product;
 import com.marketapp.MarketApp.model.User;
@@ -12,6 +14,7 @@ import org.springframework.util.CollectionUtils;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class BasketProductService {
@@ -47,10 +50,32 @@ public class BasketProductService {
 
         List<BasketProduct> productList = user.getProductList();
         productList.add(basketProduct);
+        if(basketProduct.getQuantity() == 0)
+            deleteBasketProduct(basketProduct.getId());
 
 
         return basketProductDtoConverter
                 .convertBasketProductToBasketProductDto(basketProductRepository.save(basketProduct));
+    }
+
+    public void clearBasket() {
+
+        basketProductRepository.deleteAll();
+
+
+    }
+
+    public BasketProductDto deleteBasketProduct(Long id) {
+        BasketProduct basketProduct = findProductById(id);
+        basketProductRepository.delete(basketProduct);
+        return basketProductDtoConverter.convertBasketProductToBasketProductDto(basketProduct);
+
+    }
+
+    protected BasketProduct findProductById(Long id) {
+        return basketProductRepository.findById(id)
+                .orElseThrow(
+                        () -> new ProductNotFoundException("Product could not find by id: " + id));
     }
 
     private BasketProduct createBasketProduct(int quantity, Product product, User user) {

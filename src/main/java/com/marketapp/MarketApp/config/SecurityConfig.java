@@ -1,3 +1,4 @@
+/*
 package com.marketapp.MarketApp.config;
 
 import org.springframework.context.annotation.Bean;
@@ -38,3 +39,4 @@ public class SecurityConfig {
         return new InMemoryUserDetailsManager(user);
     }
 }
+*/

@@ -2,7 +2,6 @@ package com.marketapp.MarketApp.service;
 
 import com.marketapp.MarketApp.dto.AddProductRequest;
 import com.marketapp.MarketApp.dto.BasketProductDto;
-import com.marketapp.MarketApp.dto.ProductDto;
 import com.marketapp.MarketApp.dto.converter.BasketProductDtoConverter;
 import com.marketapp.MarketApp.exception.ProductNotFoundException;
 import com.marketapp.MarketApp.model.BasketProduct;
@@ -10,11 +9,9 @@ import com.marketapp.MarketApp.model.Product;
 import com.marketapp.MarketApp.model.User;
 import com.marketapp.MarketApp.repository.BasketProductRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 
-import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Objects;
 
 @Service
 public class BasketProductService {
@@ -40,7 +37,7 @@ public class BasketProductService {
         User user = userService.findUserById(addProductRequest.getUserId());
 
         BasketProduct basketProduct = user.getProductList().stream()
-                .filter(item -> item.getProduct().getId() == product.getId())
+                .filter(item -> Objects.equals(item.getProduct().getId(), product.getId()))
                 .findFirst()
                 .map(item -> {
                     item.setQuantity(item.getQuantity() + addProductRequest.getQuantity());
@@ -59,10 +56,7 @@ public class BasketProductService {
     }
 
     public void clearBasket() {
-
         basketProductRepository.deleteAll();
-
-
     }
 
     public BasketProductDto deleteBasketProduct(Long id) {

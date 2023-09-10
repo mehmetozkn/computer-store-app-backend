@@ -5,22 +5,19 @@ import com.marketapp.MarketApp.dto.converter.ProductDtoConverter;
 import com.marketapp.MarketApp.exception.ProductNotFoundException;
 import com.marketapp.MarketApp.model.Product;
 import com.marketapp.MarketApp.repository.ProductRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class ProductService {
 
     private final ProductRepository productRepository;
     private final ProductDtoConverter productDtoConverter;
 
-    public ProductService(ProductRepository productRepository, ProductDtoConverter productDtoConverter) {
-        this.productRepository = productRepository;
-        this.productDtoConverter = productDtoConverter;
-
-    }
 
     public ProductDto createProduct(Product product) {
         return productDtoConverter.convertProductToProductDto(productRepository.save(product));
@@ -48,7 +45,6 @@ public class ProductService {
         Product product = findProductById(id);
         productRepository.delete(product);
         return productDtoConverter.convertProductToProductDto(product);
-
     }
 
     protected Product findProductById(Long id) {

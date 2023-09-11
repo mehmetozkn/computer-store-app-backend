@@ -13,8 +13,7 @@ public class BasketProductDtoConverter {
     }
 
     public BasketProductDto convertBasketProductToBasketProductDto(BasketProduct basketProduct){
-        BasketProductDto basketProductDto = modelMapper.map(basketProduct, BasketProductDto.class);
-        return basketProductDto;
+        return modelMapper.map(basketProduct, BasketProductDto.class);
 
     }
 }

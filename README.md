@@ -33,7 +33,6 @@ The application has 3 services
 
 - It provides adding comment into the basket.
 - It has a method called addProductToBasket that takes a request called addProductRequest. This request includes user_id, product_id and quantity.
-- It finds the registered user with user_id, finds the product with product_id, finds the basket with basket_id and adds the number of comment to the relevant user's basket.
 
 ---
 

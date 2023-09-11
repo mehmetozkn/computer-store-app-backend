@@ -44,6 +44,7 @@ The application has 3 services
 - Spring Data JPA
 - Restful API
 - H2 In memory database
+- MySQL
 
 ---
 

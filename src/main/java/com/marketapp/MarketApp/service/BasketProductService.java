@@ -8,12 +8,14 @@ import com.marketapp.MarketApp.model.BasketProduct;
 import com.marketapp.MarketApp.model.Product;
 import com.marketapp.MarketApp.model.User;
 import com.marketapp.MarketApp.repository.BasketProductRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
 
 @Service
+@RequiredArgsConstructor
 public class BasketProductService {
 
     private final BasketProductRepository basketProductRepository;
@@ -21,16 +23,7 @@ public class BasketProductService {
     private final ProductService productService;
     private final UserService userService;
 
-    public BasketProductService(BasketProductRepository basketProductRepository,
-                                BasketProductDtoConverter basketProductDtoConverter,
-                                ProductService productService,
-                                UserService userService
-    ) {
-        this.basketProductRepository = basketProductRepository;
-        this.basketProductDtoConverter = basketProductDtoConverter;
-        this.productService = productService;
-        this.userService = userService;
-    }
+
 
     public BasketProductDto addProduct(AddProductRequest addProductRequest) {
         Product product = productService.findProductById(addProductRequest.getProductId());

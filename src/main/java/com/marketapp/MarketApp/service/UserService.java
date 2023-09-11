@@ -7,23 +7,19 @@ import com.marketapp.MarketApp.model.BasketProduct;
 import com.marketapp.MarketApp.model.User;
 import com.marketapp.MarketApp.repository.BasketProductRepository;
 import com.marketapp.MarketApp.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
     private final UserDtoConverter userDtoConverter;
     private final BasketProductRepository basketProductRepository;
-
-    public UserService(UserRepository userRepository, UserDtoConverter userDtoConverter, BasketProductRepository basketProductRepository) {
-        this.userRepository = userRepository;
-        this.userDtoConverter = userDtoConverter;
-        this.basketProductRepository = basketProductRepository;
-    }
 
     public List<BasketProduct> getProductsByUserId(Long userId) {
         User user = findUserById(userId);

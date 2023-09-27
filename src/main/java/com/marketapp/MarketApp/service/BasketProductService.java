@@ -34,18 +34,27 @@ public class BasketProductService {
                 .findFirst()
                 .map(item -> {
                     item.setQuantity(item.getQuantity() + addProductRequest.getQuantity());
+                    System.out.println(item.getId());
+                    System.out.println(item.getQuantity());
                     return item;
                 })
-                .orElseGet(() -> createBasketProduct(addProductRequest.getQuantity(), product, user));
+                .orElseGet(() -> {
+                    return createBasketProduct(addProductRequest.getQuantity(), product, user);
+                });
 
-        List<BasketProduct> productList = user.getProductList();
-        productList.add(basketProduct);
-        if(basketProduct.getQuantity() == 0)
+     
+        if(basketProduct.getQuantity() == 0){ 
+            // completely remove product from cart when quantity is 0
             deleteBasketProduct(basketProduct.getId());
+            return null;
 
+        }else {
+            List<BasketProduct> productList = user.getProductList();
+            productList.add(basketProduct);
+            return basketProductDtoConverter
+                    .convertBasketProductToBasketProductDto(basketProductRepository.save(basketProduct));
+        }
 
-        return basketProductDtoConverter
-                .convertBasketProductToBasketProductDto(basketProductRepository.save(basketProduct));
     }
 
     public void clearBasket() {
